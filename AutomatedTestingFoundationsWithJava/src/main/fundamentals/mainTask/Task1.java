@@ -8,8 +8,7 @@ public class Task1 {
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter your name: ");
-        String name = scanner.nextLine();
-        System.out.printf("Hello %s!", name);
-
+        System.out.printf("Hello %s!", scanner.nextLine());
+        scanner.close();
     }
 }

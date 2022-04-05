@@ -1,74 +1,61 @@
 package main.fundamentals.optionalTask1;
 
-import java.util.Scanner;
-
 public class Task3 {
     
     public static void main(String[] args) {
     
-        int [] array = inputArray();
-        int averageLen = averageLength(array);
-        int length;
+        if (args.length == 0) {
+            System.out.println("Empty String[] args");
+        } else {
     
-        for (int i = 0; i < array.length; i++) {
+            int[] array = new int[args.length];
+            for (int i = 0; i < args.length; i++) {
+                array[i] = Integer.parseInt(args[i]);
+            }
+            int averageLen = averageLength(array);
+            int length;
+            boolean checkNoOneNumber = true;
+    
+            for (int j : array) {
+        
+                length = totalLength(j);
+        
+                if (length < averageLen) {
+                    System.out.println("Number is " + j + " with length " + length);
+                    checkNoOneNumber = false;
+                }
+            }
             
-            length = totalLength(array[i]);
-            
-            if (length <= averageLen){
-                System.out.println("Number is " + array[i] + " with length " + length);
+            if (checkNoOneNumber) {
+                System.out.println("No one number");
             }
         }
-        
     }
     
-    static int averageLength(int [] arr){
+    static int averageLength(int[] arr) {
         
         int avLen = 0;
         int len;
     
-        for (int i = 0; i < arr.length; i++) {
-            len = totalLength(arr[i]);
+        for (int j : arr) {
+            len = totalLength(j);
             avLen += len;
         }
         
         avLen /= arr.length;
         
         return avLen;
-        
     }
     
-    static int totalLength(int number){
+    static int totalLength(int number) {
         
         int count = 1;
         
-        while (number <= 0 || number >= 10){
+        while (number <= 0 || number >= 10) {
             number /= 10;
             count++;
         }
         
         return count;
     }
-    
-    static int [] inputArray() {
-        
-        final int N;
-        int[] array;
-        Scanner scanner = new Scanner(System.in);
-        
-        System.out.println("Enter number of numbers: ");
-        N = scanner.nextInt();
-        array = new int[N];
-        System.out.println();
-        
-        // Input array
-        System.out.print("Enter " + N + " numbers: ");
-        for (int i = 0; i < N; i++) {
-            array[i] = scanner.nextInt();
-            System.out.print(" ");
-        }
-        System.out.println();
-        
-        return array;
-    }
-    
 }

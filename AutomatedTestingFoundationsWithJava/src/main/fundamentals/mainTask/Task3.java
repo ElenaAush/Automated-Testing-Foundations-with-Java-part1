@@ -1,30 +1,23 @@
 package main.fundamentals.mainTask;
 
-import java.util.Arrays;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Task3 {
     
     public static void main(String[] args) {
     
-        final int SIZE;
-        int[] array;
-        Scanner scanner = new Scanner(System.in);
+        int size = Integer.parseInt(args[0]);
+        int[] array = new int[size];
         Random random = new Random();
         
-        System.out.println("Enter number of numbers: ");
-        SIZE = scanner.nextInt();
-        array = new int[SIZE];
+        for (int i = 0; i < size; i++) {
+            array[i] = random.nextInt();
+            System.out.print(array[i] + " ");
+        }
         System.out.println();
         
-        for (int i = 0; i < SIZE; i++) {
-            array[i] = random.nextInt();
+        for (int elem : array) {
+            System.out.println(elem);
         }
-        
-        String arrayString = Arrays.toString(array);
-        System.out.print(arrayString);
-        System.out.println(arrayString);
-        
     }
 }

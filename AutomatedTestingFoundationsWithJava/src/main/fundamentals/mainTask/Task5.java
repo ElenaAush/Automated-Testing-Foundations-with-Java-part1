@@ -52,5 +52,7 @@ public class Task5 {
             default:
                 System.out.println("Data entered incorrectly");
         }
+        
+        scanner.close();
     }
 }

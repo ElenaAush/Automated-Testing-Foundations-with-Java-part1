@@ -1,57 +1,54 @@
 package main.fundamentals.optionalTask2;
 
-import java.util.Scanner;
-
 public class Task2 {
     
     public static void main(String[] args) {
     
-        int [] [] array = inputArray();
-        int count = 0;
-        int tempCount;
-        int temp;
+        if (args.length == 0) {
+            System.out.println("Empty String[] args");
+        } else if (!args[0].matches("[0-9]+")) {
+            System.out.println("Enter size (number)");
+        } else {
+        
+            int[][] array = inputArray(Integer.parseInt(args[0]));
+            int count = 0;
+            int tempCount;
+            int temp;
     
-        for (int i = 0; i < array.length; i++) {
+            for (int[] ints : array) {
+        
+                tempCount = 0;
+                temp = 0;
+        
+                for (int j = 1; j < ints.length; j++) {
             
-            tempCount = 0;
-            temp = 0;
+                    if (ints[j - 1] > ints[j]) {
+                        temp++;
+                    }
+                    if (ints[j - 1] <= ints[j]) {
+                        temp = 0;
+                    }
             
-            for (int j = 1; j < array[i].length; j++) {
-                
-                if (array[i][j-1] > array[i][j]) temp++;
-                if (array[i][j-1] <= array[i][j]) temp = 0;
-                
-                if (temp > tempCount) tempCount = temp;
-                
+                    if (temp > tempCount) {
+                        tempCount = temp;
+                    }
+                }
+        
+                if (tempCount > count) {
+                    count = tempCount;
+                }
             }
-            
-            if (tempCount > count) {
-                count = tempCount;
-            }
-            System.out.println("tempCount " + tempCount);
-            System.out.println("count " + count);
+        
+            System.out.println("Largest number of increasing elements in rows " + count);
         }
-    
-        System.out.println("Largest number of increasing elements in rows " + count);
-    
     }
     
-    static int [] [] inputArray() {
-    
-        Scanner scanner = new Scanner(System.in);
-        final int SIZE1;
-        final int SIZE2;
-        int [] [] array;
-    
-        System.out.print("Enter 1 size = ");
-        SIZE1 = scanner.nextInt();
-        System.out.print("Enter 2 size = ");
-        SIZE2 = scanner.nextInt();
+    static int [] [] inputArray(int size) {
         
-        array = new int [SIZE1] [SIZE2];
+        int [] [] array = new int [size] [size];
     
-        for (int i = 0; i < SIZE1; i++) {
-            for (int j = 0; j < SIZE2; j++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 array[i][j] = ((int)(Math.random() * 10));
                 System.out.print(array[i][j] + " ");
             }
@@ -60,7 +57,5 @@ public class Task2 {
         System.out.println();
         
         return array;
-        
     }
-    
 }

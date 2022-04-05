@@ -1,68 +1,64 @@
 package main.fundamentals.optionalTask2;
 
-import java.util.Scanner;
-
 public class Task4 {
     
     public static void main(String[] args) {
-        
-        Scanner scanner = new Scanner(System.in);
-        final int SIZE1;
-        final int SIZE2;
-        
-        System.out.print("Enter 1 size = ");
-        SIZE1 = scanner.nextInt();
-        System.out.print("Enter 2 size = ");
-        SIZE2 = scanner.nextInt();
-        
-        int [] [] array = inputArray(SIZE1, SIZE2);
-        int [] [] resultArray = new int [SIZE1-1] [SIZE2-1];
-        int remoteRow = 0;
-        int remoteColumn = 0;
-        int elemMax = array[0][0];
-        int p = 0;
-        int q;
-        
-        // Find position max element
-        for (int i = 0; i < SIZE1; i++) {
-            for (int j = 0; j < SIZE2; j++) {
-                if (elemMax < array[i][j]) {
-                    elemMax = array[i][j];
-                    remoteRow = i;
-                    remoteColumn = j;
+    
+        if (args.length == 0) {
+            System.out.println("Empty String[] args");
+        } else if (!args[0].matches("[0-9]+")) {
+            System.out.println("Enter size (number)");
+        } else {
+    
+            int size = Integer.parseInt(args[0]);
+            int[][] array = inputArray(size);
+            int[][] resultArray = new int[size - 1][size - 1];
+            int remoteRow = 0;
+            int remoteColumn = 0;
+            int elemMax = array[0][0];
+            int p = 0;
+            int q;
+    
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    if (elemMax < array[i][j]) {
+                        elemMax = array[i][j];
+                        remoteRow = i;
+                        remoteColumn = j;
+                    }
                 }
             }
-        }
+    
+            for (int i = 0; i < size; i++) {
         
-        // Delete
-        for (int i = 0; i < SIZE1; i++) {
+                if (i == remoteRow) {
+                    continue;
+                }
+        
+                q = 0;
+                for (int j = 0; j < size; j++) {
+                    
+                    if (j == remoteColumn) {
+                        continue;
+                    }
             
-            if (i == remoteRow) continue;
-            
-            q = 0;
-            for (int j = 0; j < SIZE2; j++) {
-                if (j == remoteColumn) continue;
-                
-                resultArray[p][q] = array[i][j];
-                System.out.print(resultArray[p][q] + " ");
-                q++;
-                
+                    resultArray[p][q] = array[i][j];
+                    System.out.print(resultArray[p][q] + " ");
+                    q++;
+                }
+                System.out.println();
+        
+                p++;
             }
-            System.out.println();
-            
-            p++;
         }
-        
     }
     
-    static int [] [] inputArray(int SIZE1, int SIZE2) {
+    static int [] [] inputArray(int size) {
         
-        int [] [] array;
+        int [] [] array = new int [size] [size];
         
-        array = new int [SIZE1] [SIZE2];
-        
-        for (int i = 0; i < SIZE1; i++) {
-            for (int j = 0; j < SIZE2; j++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 array[i][j] = ((int)(Math.random() * 10));
                 System.out.print(array[i][j] + " ");
             }
@@ -71,7 +67,5 @@ public class Task4 {
         System.out.println();
         
         return array;
-        
     }
-    
 }
